@@ -44,3 +44,10 @@ def get_profit_finance():
     cost_sum = Finance.objects.aggregate(total=Sum('cost'))
     expense_sum = Finance.objects.aggregate(total=Sum('expense'))
     return cost_sum.get('total') - expense_sum.get('total')
+
+
+def get_net_profit_finance():
+    cost_sum = Finance.objects.aggregate(total=Sum('cost'))
+    expense_sum = Finance.objects.aggregate(total=Sum('expense'))
+    tax_sum = Finance.objects.aggregate(total=Sum('tax'))
+    return cost_sum.get('total') - expense_sum.get('total') - tax_sum.get('total')

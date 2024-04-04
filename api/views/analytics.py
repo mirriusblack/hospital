@@ -1,5 +1,5 @@
 from api.mixin import HospitalGenericViewSet
-from api.service import get_upcoming_visits_count, get_past_visits_count, get_department_names, get_avg_rating, get_income_sum_finance, get_expense_sum_finance, get_tax_sum_finance, get_profit_finance
+from api.service import get_upcoming_visits_count, get_past_visits_count, get_department_names, get_avg_rating, get_income_sum_finance, get_expense_sum_finance, get_tax_sum_finance, get_profit_finance, get_net_profit_finance
 from api.models import Patient, Doctor, Visit, Department
 from rest_framework import status
 from rest_framework.response import Response
@@ -66,7 +66,8 @@ class FinanceAnalyticsView(
         response = {
             'income_sum': get_income_sum_finance(),
             'expense_sum': get_expense_sum_finance(),
-            'tax_sum_from_expense': get_tax_sum_finance(),
-            'profit_sum': get_profit_finance()
+            'profit_sum': get_profit_finance(),
+            'tax_sum': get_tax_sum_finance(),
+            'net_profit_sum': get_net_profit_finance()
         }
         return Response(status=status.HTTP_200_OK, data=response)
